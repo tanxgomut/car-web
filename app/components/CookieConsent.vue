@@ -41,7 +41,7 @@ const onModalConfirm = () => {
                         <div class="flex items-center gap-4">
                             <UIcon name="i-lucide-cookie" class="w-6 h-6 text-primary-500 hidden md:block" />
                             <div>
-                                <p class="text-sm ">
+                                <p class="text-xs md:text-sm ">
                                     เว็บไซต์นี้ใช้คุกกี้เพื่อประสบการณ์ที่ดีที่สุด
                                     <button @click="isModalOpen = true" class="underline hover:text-primary-500 ml-1">
                                         อ่านนโยบายความเป็นส่วนตัว

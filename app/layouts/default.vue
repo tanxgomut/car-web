@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { NavigationMenuItem } from '@nuxt/ui'
+import type { FooterColumn } from '@nuxt/ui'
 import Logo from '~/components/Logo.vue'
+
 
 const route = useRoute()
 
@@ -164,6 +166,68 @@ const itemss = computed<NavigationMenuItem[]>(() => [
         active: route.hash === '#contact'
     }])
 
+
+const columns: FooterColumn[] = [
+    {
+        label: 'Contact',
+        children: [
+            {
+                label: 'คุณ ดูแลรถ',
+                icon: 'i-lucide-user',
+            },
+            {
+                label: 'โทร: 081-234-5678',
+                icon: 'i-lucide-phone',
+                to: 'tel:0812345678',
+                target: '_self'
+            },
+            {
+                label: 'LINE: @car-auto',
+                icon: 'i-simple-icons-line',
+                to: 'https://line.me/ti/p/@car-auto',
+                target: '_blank'
+            },
+            {
+                label: 'Facebook Fanpage',
+                icon: 'i-simple-icons-facebook',
+                to: 'https://facebook.com/car-auto-shop',
+                target: '_blank'
+            },
+            {
+                label: 'แผนที่ร้าน (Google Maps)',
+                icon: 'i-lucide-map-pin',
+                to: 'https://maps.google.com/?q=พิกัดร้านของคุณ',
+                target: '_blank'
+            },
+
+        ]
+    },
+    {
+        label: 'Services',
+        children: [
+            {
+                label: 'ชุดแต่งรอบคัน (Body Kits)',
+                to: '/services/body-kits',
+                target: '_self'
+            },
+            {
+                label: 'ล้อแม็ก & ยาง (Wheels & Tires)',
+                to: '/services/wheels',
+                target: '_self'
+            },
+            {
+                label: 'ระบบช่วงล่าง (Suspension)',
+                to: '/services/suspension',
+                target: '_self'
+            },
+            {
+                label: 'เซอร์วิสทั่วไป (Maintenance)',
+                to: '/services/maintenance',
+                target: '_self'
+            }
+        ]
+    }
+]
 </script>
 <template>
     <div>
@@ -192,7 +256,7 @@ const itemss = computed<NavigationMenuItem[]>(() => [
 
         </UHeader>
 
-        <nav class="sticky top-(--ui-header-height) bg-default/75 z-[2]">
+        <nav class="sticky top-(--ui-header-height) backdrop-blur-md bg-default/75 z-[2]">
             <UNavigationMenu highlight highlight-color="primary" orientation="horizontal"
                 :items="isMobile ? itemss : items" class="lg:hidden justify-center border-b border-default w-full" :ui="{
                     label: 'w-full flex items-center gap-1.5 font-semibold text-md text-highlighted px-2.5 py-1.5',
@@ -207,13 +271,28 @@ const itemss = computed<NavigationMenuItem[]>(() => [
 
         <USeparator icon="i-token-branded-cwar" class="mt-16" />
 
-        <UFooter>
+        <UFooter :ui="{ top: 'pt-6 pb-0 lg:pt-8 lg:pb-2', }">
+            <template #top>
+                <UContainer class="mb-6">
+                    <UFooterColumns :columns="columns">
+                        <template #right>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.613627725927!2d100.56053331483036!3d13.736717590357328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f0000000001%3A0x0!2zMTPCsDQ0JzEyLjIiTiAxMDDCsDMzJzQ1LjgiRQ!5e0!3m2!1sen!2sth!4v1630000000000!5m2!1sen!2sth"
+                                width="100%" height="100%" style="border:0;" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                class="w-full h-full group-hover:grayscale-0 transition-all duration-500"></iframe>
+                        </template>
+                    </UFooterColumns>
+                </UContainer>
+                <USeparator type="dashed" />
+            </template>
 
             <template #left>
                 <p class="text-muted text-xs md:text-sm">
                     Copyright © {{ new Date().getFullYear() }} CAR-AUTO. All rights reserved.
                 </p>
             </template>
+
 
             <template #right>
                 <UTooltip v-for="link in socialLinks" :key="link.label" :text="link.label">
