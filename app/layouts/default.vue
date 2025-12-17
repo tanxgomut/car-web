@@ -2,13 +2,18 @@
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { NavigationMenuItem } from '@nuxt/ui'
 import Logo from '~/components/Logo.vue'
+
 const route = useRoute()
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
+const isSmAndUp = breakpoints.greaterOrEqual('sm')
+const isMobile = breakpoints.smaller('sm')
 
 const sectionTitles: Record<string, string> = {
     '#services': 'บริการ',
     '#promotion': 'โปรโมชั่น',
     '#portfolio': 'ผลงาน',
-    '#blog': 'Blog',
+    '#blogs': 'Blogs',
     '#contact': 'ติดต่อเรา'
 }
 
@@ -76,10 +81,81 @@ const items = computed<NavigationMenuItem[]>(() => [
         active: route.hash === '#portfolio'
     },
     {
-        label: 'Blog',
-        to: '/#blog',
+        label: 'Blogs',
+        to: '/#blogs',
         icon: 'i-lucide-file-text',
-        active: route.hash === '#blog'
+        active: route.path.startsWith('/blogs') || route.hash === '#blogs',
+        children: [
+            {
+                label: 'เทคนิคแต่งรถ',
+                icon: 'i-lucide-wrench',
+                description: 'เคล็ดลับและเทคนิคการแต่งรถให้สวยโดนใจ',
+                // to: '/blogs/car-modification-tips'
+            },
+            {
+                label: 'รีวิวอุปกรณ์',
+                icon: 'i-lucide-star',
+                description: 'รีวิวอุปกรณ์แต่งรถและอะไหล่คุณภาพ',
+                // to: '/blogs/equipment-reviews'
+            },
+            {
+                label: 'ข่าวสารวงการรถ',
+                icon: 'i-lucide-newspaper',
+                description: 'อัปเดตข่าวสารล่าสุดในวงการรถยนต์',
+                // to: '/blogs/car-news'
+            },
+            {
+                label: 'การดูแลรักษารถ',
+                icon: 'i-lucide-shield-check',
+                description: 'วิธีดูแลรักษารถให้อยู่ในสภาพดีเสมอ',
+                // to: '/blogs/car-maintenance'
+            },
+            {
+                label: 'แกลเลอรี่ผลงาน',
+                icon: 'i-lucide-image',
+                description: 'ชมผลงานการแต่งรถจากทีมช่างมืออาชีพ',
+                // to: '/blogs/gallery'
+            },
+            {
+                label: 'คำถามที่พบบ่อย',
+                icon: 'i-lucide-help-circle',
+                description: 'คำตอบสำหรับคำถามยอดนิยมเกี่ยวกับการแต่งรถ',
+                // to: '/blogs/faq'
+            }
+        ]
+
+    },
+    {
+        label: 'ติดต่อเรา',
+        icon: 'i-lucide-phone',
+        to: '/#contact',
+        active: route.hash === '#contact'
+    }])
+
+const itemss = computed<NavigationMenuItem[]>(() => [
+    {
+        label: 'บริการ',
+        to: '/#services',
+        icon: 'i-lucide-layers',
+        active: route.hash === '#services'
+    }, {
+
+        label: 'โปรโมชั่น',
+        to: '/#promotion',
+        icon: 'i-lucide-tag',
+        active: route.hash === '#promotion'
+    },
+    {
+        label: 'ผลงาน',
+        to: '/#portfolio',
+        icon: 'i-lucide-proportions',
+        active: route.hash === '#portfolio'
+    },
+    {
+        label: 'Blogs',
+        to: '/#blogs',
+        icon: 'i-lucide-file-text',
+        active: route.path.startsWith('/blogs') || route.hash === '#blogs',
     },
     {
         label: 'ติดต่อเรา',
@@ -96,7 +172,7 @@ const items = computed<NavigationMenuItem[]>(() => [
             :actions="[{ label: 'นัดหมายเลย', to: '/#contact', variant: 'outline', size: 'xs' }]" close
             close-icon="i-lucide-x" />
 
-        <UHeader title="R.S.R Tech Group">
+        <UHeader title="Car-Auto" :toggle="false">
 
             <template #left>
                 <NuxtLink to="/">
@@ -107,7 +183,6 @@ const items = computed<NavigationMenuItem[]>(() => [
             <UNavigationMenu :items="items" />
 
             <template #right>
-
                 <UTooltip v-for="link in socialLinks" :key="link.label" :text="link.label">
                     <UButton color="neutral" variant="ghost" :to="link.to" target="_blank" :icon="link.icon"
                         :aria-label="link.label" :size="'xs'" />
@@ -115,11 +190,16 @@ const items = computed<NavigationMenuItem[]>(() => [
                 <UColorModeButton />
             </template>
 
-            <template #body>
-                <UNavigationMenu :items="items" orientation="vertical" />
-            </template>
-
         </UHeader>
+
+        <nav class="sticky top-(--ui-header-height) bg-default/75 z-[2]">
+            <UNavigationMenu highlight highlight-color="primary" orientation="horizontal"
+                :items="isMobile ? itemss : items" class="lg:hidden justify-center border-b border-default w-full" :ui="{
+                    label: 'w-full flex items-center gap-1.5 font-semibold text-md text-highlighted px-2.5 py-1.5',
+                    link: 'gap-[4px]  sm:gap-1.5 font-normal sm:font-medium text-[12px] sm:text-sm',
+                    linkLeadingIcon: 'shrink-0 size-3 sm:size-5',
+                }" />
+        </nav>
 
         <UMain>
             <slot />
