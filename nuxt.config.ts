@@ -28,7 +28,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      siteUrl: 'https://car-web.vercel.app', // ใส่โดเมนจริงของคุณตรงนี้
+      siteUrl: 'https://car-web-gamma.vercel.app',
     }
   },
 })

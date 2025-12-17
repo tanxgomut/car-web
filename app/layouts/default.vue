@@ -1,54 +1,89 @@
 <script setup lang="ts">
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { NavigationMenuItem } from '@nuxt/ui'
 import Logo from '~/components/Logo.vue'
 const route = useRoute()
 
 const sectionTitles: Record<string, string> = {
-  '#tech-stack': 'Technologies',
-  '#services': 'Our Services',
-  '#portfolio': 'Portfolio',
-  '#about': 'About Us',
-  '#contact': 'Contact Us'
+    '#services': 'บริการ',
+    '#promotion': 'โปรโมชั่น',
+    '#portfolio': 'ผลงาน',
+    '#blog': 'Blog',
+    '#contact': 'ติดต่อเรา'
 }
 
 const pageTitle = computed(() => {
-  if (route.hash && sectionTitles[route.hash]) {
-    return sectionTitles[route.hash]
-  }
-  return null 
+    if (route.hash && sectionTitles[route.hash]) {
+        return sectionTitles[route.hash]
+    }
+    return null
 })
 
 useHead({
-  title: pageTitle 
+    title: pageTitle
 })
+
+const socialLinks = ref([
+    {
+        label: 'แอดไลน์คุยกับเรา',
+        to: 'https://line.me/ti/p/',
+        icon: 'i-simple-icons-line',
+        color: 'neutral'
+    },
+    {
+        label: 'Facebook',
+        to: 'https://www.facebook.com/ชื่อเพจของคุณ',
+        icon: 'i-simple-icons-facebook',
+        color: 'neutral'
+    },
+    {
+        label: 'Instagram',
+        to: 'https://www.instagram.com/ชื่อเพจของคุณ',
+        icon: 'i-simple-icons-instagram',
+        color: 'neutral'
+    },
+    {
+        label: 'Youtube',
+        to: 'https://www.youtube.com/ชื่อเพจของคุณ',
+        icon: 'i-simple-icons-youtube',
+        color: 'neutral'
+    },
+    {
+        label: 'Tiktok',
+        to: 'https://www.tiktok.com/@ชื่อเพจของคุณ',
+        icon: 'i-simple-icons-tiktok',
+        color: 'neutral'
+    },
+])
 
 const items = computed<NavigationMenuItem[]>(() => [
     {
-        label: 'Technologies',
-        to: '/#tech-stack',
-        icon: 'i-lucide-cpu',
-        active: route.hash === '#tech-stack'
+        label: 'บริการ',
+        to: '/#services',
+        icon: 'i-lucide-layers',
+        active: route.hash === '#services'
     }, {
 
-        label: 'services',
-        to: '/#services',
-        icon: 'i-lucide-book-open',
-        active: route.hash === '#services'
+        label: 'โปรโมชั่น',
+        to: '/#promotion',
+        icon: 'i-lucide-tag',
+        active: route.hash === '#promotion'
     },
     {
-        label: 'Portfolio',
+        label: 'ผลงาน',
         to: '/#portfolio',
-        icon: 'i-lucide-gallery-thumbnails',
+        icon: 'i-lucide-proportions',
         active: route.hash === '#portfolio'
     },
     {
-        label: 'About Us',
-        icon: 'i-lucide-users',
-        to: '/#about',
-        active: route.hash === '#about'
-    }, {
-        label: 'Contact',
-        icon: 'i-lucide-mail',
+        label: 'Blog',
+        to: '/#blog',
+        icon: 'i-lucide-file-text',
+        active: route.hash === '#blog'
+    },
+    {
+        label: 'ติดต่อเรา',
+        icon: 'i-lucide-phone',
         to: '/#contact',
         active: route.hash === '#contact'
     }])
@@ -56,8 +91,9 @@ const items = computed<NavigationMenuItem[]>(() => [
 </script>
 <template>
     <div>
-        <UBanner icon="i-lucide-info" title="ใหม่! บริการทำเว็บ E-Commerce สำเร็จรูป ราคาเริ่มต้นเบาๆ"
-            :actions="[{ label: 'ดูรายละเอียด', to: '/#services', variant: 'outline', size: 'xs' }]" close
+        <UBanner icon="i-lucide-sparkles"
+            title="🔥 โปรแรง! แพ็คเกจแต่งรถครบเซ็ต ล้อแม็ก+ยาง+ช่วงล่าง ราคาพิเศษ ฟรีค่าแรง!"
+            :actions="[{ label: 'นัดหมายเลย', to: '/#contact', variant: 'outline', size: 'xs' }]" close
             close-icon="i-lucide-x" />
 
         <UHeader title="R.S.R Tech Group">
@@ -71,15 +107,16 @@ const items = computed<NavigationMenuItem[]>(() => [
             <UNavigationMenu :items="items" />
 
             <template #right>
-                <UColorModeButton />
-                <UTooltip text="แอดไลน์คุยกับเรา">
-                    <UButton color="neutral" variant="ghost" to="https://line.me/ti/p/" target="_blank"
-                        icon="i-simple-icons-line" aria-label="LINE" />
+
+                <UTooltip v-for="link in socialLinks" :key="link.label" :text="link.label">
+                    <UButton color="neutral" variant="ghost" :to="link.to" target="_blank" :icon="link.icon"
+                        :aria-label="link.label" :size="'xs'" />
                 </UTooltip>
+                <UColorModeButton />
             </template>
 
             <template #body>
-                <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+                <UNavigationMenu :items="items" orientation="vertical" />
             </template>
 
         </UHeader>
@@ -88,29 +125,21 @@ const items = computed<NavigationMenuItem[]>(() => [
             <slot />
         </UMain>
 
-        <USeparator :avatar="{
-            src: '/logo.png',
-            alt: 'R.S.R Tech Group',
-            size: 'md'
-        }" class="mt-16" />
+        <USeparator icon="i-token-branded-cwar" class="mt-16" />
 
         <UFooter>
 
             <template #left>
-                <p class="text-muted text-sm">
-                    Copyright © {{ new Date().getFullYear() }}
+                <p class="text-muted text-xs md:text-sm">
+                    Copyright © {{ new Date().getFullYear() }} CAR-AUTO. All rights reserved.
                 </p>
             </template>
 
             <template #right>
-                <UButton icon="i-simple-icons-facebook" color="neutral" variant="ghost"
-                    to="https://www.facebook.com/ชื่อเพจของคุณ" target="_blank" aria-label="Facebook" />
-
-                <UButton icon="i-simple-icons-line" color="neutral" variant="ghost" to="https://line.me/ti/p/"
-                    target="_blank" aria-label="LINE" />
-
-                <UButton icon="i-lucide-mail" color="neutral" variant="ghost" to="mailto:info@rsrtechgroup.com"
-                    aria-label="Email" />
+                <UTooltip v-for="link in socialLinks" :key="link.label" :text="link.label">
+                    <UButton color="neutral" variant="ghost" :to="link.to" target="_blank" :icon="link.icon"
+                        :aria-label="link.label" size="xs" />
+                </UTooltip>
             </template>
 
         </UFooter>
