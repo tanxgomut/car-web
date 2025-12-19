@@ -18,27 +18,23 @@ const links = ref([
 const features = ref([
     {
         title: 'ประสบการณ์กว่า 10 ปี',
-        description: 'ทีมช่างมืออาชีพที่ผ่านการอบรมและมีประสบการณ์จริงในการแต่งรถมากว่าทศวรรษ',
-        icon: 'lucide:award', // ไอคอนรางวัล/ความเชี่ยวชาญ
-        to: '/about'
+        description: 'สั่งสมประสบการณ์กว่า 10 ปี รู้ลึก รู้จริง ทุกระบบรถยนต์',
+        icon: 'i-lucide-medal',
     },
     {
-        title: 'ดูแลรถมาแล้ว 5,000+ คัน',
-        description: 'ได้รับความไว้วางใจจากลูกค้ามากมาย ทั้งรถบ้าน รถซิ่ง และ Supercar',
-        icon: 'lucide:car-front', // ไอคอนรูปรถ
-        to: '/portfolio'
+        title: 'ลูกค้าวางใจกว่า 5,000 คัน',
+        description: 'เสียงตอบรับจากลูกค้ากว่า 5,000 ราย คือเครื่องยืนยันคุณภาพของเรา',
+        icon: 'i-lucide-thumbs-up',
     },
     {
-        title: 'รับประกันงานติดตั้ง',
-        description: 'อุ่นใจด้วยการรับประกันงานติดตั้งและสินค้าทุกชิ้น พร้อมบริการหลังการขาย',
-        icon: 'lucide:shield-check', // ไอคอนโล่รับประกัน
-        to: '/warranty'
+        title: 'รับประกันทุกงานบริการ',
+        description: 'ดูแลหลังการขายอย่างดีที่สุด มีปัญหาเคลมได้ ไม่ทิ้งลูกค้า',
+        icon: 'i-lucide-heart-handshake',
     },
     {
         title: 'เครื่องมือมาตรฐานสากล',
-        description: 'ใช้เครื่องมือทันสมัยและห้องปฏิบัติการที่สะอาด ปลอดภัย ต่อรถที่คุณรัก',
-        icon: 'lucide:wrench', // ไอคอนเครื่องมือ
-        to: '/services'
+        description: 'เครื่องมือทันสมัย ถนอมรถคุณทุกขั้นตอนเหมือนรถ Supercar',
+        icon: 'i-lucide-wrench',
     }
 ])
 
@@ -47,20 +43,20 @@ const features = ref([
 <template>
     <UContainer>
         <UPageHero
-            :ui="{ title: 'text-5xl sm:text-7xl text-pretty tracking-tight leading-14 sm:leading-21 font-bold text-highlighted' }"
-            headline="Ultimate Performance & Style" title="ปลุกสัญชาตญาณความแรง ในสไตล์ที่เป็นคุณ"
-            description="ยกระดับขีดจำกัดของรถคุณด้วยชุดแต่งเกรดพรีเมียม ช่วงล่างเซ็ตใหม่ และล้อแม็กดีไซน์ล้ำ พร้อมดูแลทุกรายละเอียดโดยทีมช่างมืออาชีพจาก DiveD Garage"
-            orientation="horizontal" :links="links">
-            <NuxtImg src="/images/car/2.jpg" alt="car auto" class="rounded-lg shadow-2xl ring ring-default"
+            :ui="{ title: 'text-4xl sm:text-6xl text-pretty tracking-tight leading-14 sm:leading-21 font-bold text-highlighted' }"
+            headline="Trusted Auto Service" title="ดูแลรถคุณด้วยความจริงใจ ใส่ใจทุกรายละเอียดเหมือนรถของเราเอง"
+            description="มั่นใจได้ในทุกงานซ่อมและงานแต่ง ด้วยมาตรฐานการดูแลที่เหนือกว่า ไม่ว่าจะเป็นการตรวจเช็คสภาพ แก้ไขปัญหาเครื่องยนต์ หรือตกแต่งเพิ่มสมรรถนะ เราพร้อมดูแลรถคันโปรดของคุณให้ดีที่สุด"
+            orientation="horizontal" :links="links as any">
+            <NuxtImg src="/images/car/2.jpg" alt="Car Auto Service" class="rounded-lg shadow-2xl ring ring-default"
                 loading="lazy" placeholder="loading.png" />
         </UPageHero>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 mb-16 md:mb-24">
             <UPageFeature v-for="feature in features" :key="feature.title" :title="feature.title"
-                :description="feature.description" :icon="feature.icon" :to="feature.to" target="_blank" />
+                :description="feature.description" :icon="feature.icon" target="_blank" />
         </div>
 
-        <UPageLogos title="รองรับรถยนต์ชั้นนำทุกรุ่น" marquee :items="[
+        <UPageLogos class="mb-16 md:mb-24" title="รองรับรถยนต์ชั้นนำทุกรุ่น" marquee :items="[
             'i-simple-icons-toyota',
             'i-simple-icons-honda',
             'i-simple-icons-bmw',

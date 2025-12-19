@@ -35,7 +35,7 @@ const onModalConfirm = () => {
             leave-active-class="transition duration-300 ease-in" leave-from-class="transform translate-y-0 opacity-100"
             leave-to-class="transform translate-y-full opacity-0">
             <div v-if="isBannerOpen" class="fixed bottom-0 inset-x-0 z-40">
-                <div class=" backdrop-blur-md border-t border-gray-200 dark:border-gray-800 p-4 shadow-lg">
+                <div class="bg-default/75 backdrop-blur border-t border-gray-200 dark:border-gray-800 p-4 shadow-lg">
                     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
 
                         <div class="flex items-center gap-4">

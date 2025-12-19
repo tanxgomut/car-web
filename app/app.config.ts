@@ -18,26 +18,19 @@ export default defineAppConfig({
         linkLabel: 'truncate',
         linkLabelExternalIcon: 'size-3 absolute top-0 text-dimmed inline-block'
       },
-      variants: {
-        active: {
-          true: {
-            link: 'text-primary font-medium '
-          },
-          false: {
-            link: [
-              'text-muted hover:text-default',
-              'transition-colors'
-            ]
-          }
-        }
-      }
     },
 
     pageLogos: {
       slots: {
         logo: 'size-6 md:size-10 shrink-0'
       },
-    }
-  }
+    },
+    pageFeature: {
+      slots: {
+        title: 'text-2xl md:text-[32px] text-pretty font-semibold text-highlighted'
+      }
+    },
+  },
+
 })
 

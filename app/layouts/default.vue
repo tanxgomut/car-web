@@ -65,16 +65,17 @@ const socialLinks = ref([
 
 const items = computed<NavigationMenuItem[]>(() => [
     {
-        label: 'บริการ',
-        to: '/#services',
-        icon: 'i-lucide-layers',
-        active: route.hash === '#services'
-    }, {
 
         label: 'โปรโมชั่น',
         to: '/#promotion',
         icon: 'i-lucide-tag',
         active: route.hash === '#promotion'
+    },
+    {
+        label: 'บริการ',
+        to: '/#services',
+        icon: 'i-lucide-layers',
+        active: route.hash === '#services'
     },
     {
         label: 'ผลงาน',
@@ -136,16 +137,17 @@ const items = computed<NavigationMenuItem[]>(() => [
 
 const itemss = computed<NavigationMenuItem[]>(() => [
     {
-        label: 'บริการ',
-        to: '/#services',
-        icon: 'i-lucide-layers',
-        active: route.hash === '#services'
-    }, {
 
         label: 'โปรโมชั่น',
         to: '/#promotion',
         icon: 'i-lucide-tag',
         active: route.hash === '#promotion'
+    },
+    {
+        label: 'บริการ',
+        to: '/#services',
+        icon: 'i-lucide-layers',
+        active: route.hash === '#services'
     },
     {
         label: 'ผลงาน',
@@ -172,7 +174,7 @@ const columns: FooterColumn[] = [
         label: 'Contact',
         children: [
             {
-                label: 'คุณ ดูแลรถ',
+                label: 'คุณ ไมเคิล',
                 icon: 'i-lucide-user',
             },
             {
@@ -228,79 +230,99 @@ const columns: FooterColumn[] = [
         ]
     }
 ]
+const isScrolled = ref(false)
+
+const handleScroll = () => {
+    isScrolled.value = window.scrollY > 20
+}
+
+onMounted(() => {
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+})
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll)
+})
 </script>
 <template>
-    <div>
-        <UBanner icon="i-lucide-sparkles"
-            title="🔥 โปรแรง! แพ็คเกจแต่งรถครบเซ็ต ล้อแม็ก+ยาง+ช่วงล่าง ราคาพิเศษ ฟรีค่าแรง!"
-            :actions="[{ label: 'นัดหมายเลย', to: '/#contact', variant: 'outline', size: 'xs' }]" close
-            close-icon="i-lucide-x" />
 
-        <UHeader title="Car-Auto" :toggle="false">
-
-            <template #left>
-                <NuxtLink to="/">
-                    <Logo />
-                </NuxtLink>
-            </template>
-
-            <UNavigationMenu :items="items" />
-
-            <template #right>
-                <UTooltip v-for="link in socialLinks" :key="link.label" :text="link.label">
-                    <UButton color="neutral" variant="ghost" :to="link.to" target="_blank" :icon="link.icon"
-                        :aria-label="link.label" :size="'xs'" />
-                </UTooltip>
-                <UColorModeButton />
-            </template>
-
-        </UHeader>
-
-        <nav class="sticky top-(--ui-header-height) backdrop-blur-md bg-default/75 z-[2]">
-            <UNavigationMenu highlight highlight-color="primary" orientation="horizontal"
-                :items="isMobile ? itemss : items" class="lg:hidden justify-center border-b border-default w-full" :ui="{
-                    label: 'w-full flex items-center gap-1.5 font-semibold text-md text-highlighted px-2.5 py-1.5',
-                    link: 'gap-[4px]  sm:gap-1.5 font-normal sm:font-medium text-[12px] sm:text-sm',
-                    linkLeadingIcon: 'shrink-0 size-3 sm:size-5',
-                }" />
-        </nav>
-
-        <UMain>
-            <slot />
-        </UMain>
-
-        <USeparator icon="i-token-branded-cwar" class="mt-16" />
-
-        <UFooter :ui="{ top: 'pt-6 pb-0 lg:pt-8 lg:pb-2', }">
-            <template #top>
-                <UContainer class="mb-6">
-                    <UFooterColumns :columns="columns">
-                        <template #right>
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.613627725927!2d100.56053331483036!3d13.736717590357328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f0000000001%3A0x0!2zMTPCsDQ0JzEyLjIiTiAxMDDCsDMzJzQ1LjgiRQ!5e0!3m2!1sen!2sth!4v1630000000000!5m2!1sen!2sth"
-                                width="100%" height="100%" style="border:0;" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"
-                                class="w-full h-full group-hover:grayscale-0 transition-all duration-500"></iframe>
-                        </template>
-                    </UFooterColumns>
-                </UContainer>
-                <USeparator type="dashed" />
-            </template>
-
-            <template #left>
-                <p class="text-muted text-xs md:text-sm">
-                    Copyright © {{ new Date().getFullYear() }} CAR-AUTO. All rights reserved.
-                </p>
-            </template>
+    <UBanner icon="i-lucide-sparkles" title="🔥 โปรแรง! แพ็คเกจแต่งรถครบเซ็ต ล้อแม็ก+ยาง+ช่วงล่าง ราคาพิเศษ ฟรีค่าแรง!"
+        :actions="[{ label: 'นัดหมายเลย', to: '/#contact', variant: 'outline', size: 'xs' }]" close
+        close-icon="i-lucide-x" />
 
 
-            <template #right>
-                <UTooltip v-for="link in socialLinks" :key="link.label" :text="link.label">
-                    <UButton color="neutral" variant="ghost" :to="link.to" target="_blank" :icon="link.icon"
-                        :aria-label="link.label" size="xs" />
-                </UTooltip>
-            </template>
+    <UHeader title="Car-Auto" :toggle="false" :ui="{
+        root: isScrolled
+            ? 'sticky bg-default/85'
+            : 'sticky lg:fixed w-full bg-default/85',
 
-        </UFooter>
-    </div>
+    }">
+
+        <template #left>
+            <NuxtLink to="/">
+                <Logo />
+            </NuxtLink>
+        </template>
+
+        <UNavigationMenu :items="items" />
+
+        <template #right>
+            <UTooltip v-for="link in socialLinks" :key="link.label" :text="link.label">
+                <UButton color="neutral" variant="ghost" :to="link.to" target="_blank" :icon="link.icon"
+                    :aria-label="link.label" :size="'xs'" />
+            </UTooltip>
+            <UColorModeButton />
+        </template>
+
+    </UHeader>
+
+    <nav class="sticky top-(--ui-header-height) backdrop-blur z-50"
+        :class="isScrolled ? 'bg-default/85' : 'bg-default/50'">
+        <UNavigationMenu highlight highlight-color="primary" orientation="horizontal" :items="isMobile ? itemss : items"
+            class="lg:hidden justify-center border-b border-default w-full" :ui="{
+                label: 'w-full flex items-center gap-1.5 font-semibold text-md text-highlighted px-2.5 py-1.5',
+                link: 'gap-[4px]  sm:gap-1.5 font-normal sm:font-medium text-[12px] sm:text-sm',
+                linkLeadingIcon: 'shrink-0 size-3 sm:size-5',
+            }" />
+    </nav>
+
+    <UMain>
+        <slot />
+    </UMain>
+
+    <USeparator icon="i-token-branded-cwar" class="mt-16" />
+
+    <UFooter id="contact" class="scroll-mt-24" :ui="{ top: 'pt-6 pb-0 lg:pt-8 lg:pb-2', }">
+        <template #top>
+            <UContainer class="mb-6">
+                <UFooterColumns :columns="columns">
+                    <template #right>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.613627725927!2d100.56053331483036!3d13.736717590357328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f0000000001%3A0x0!2zMTPCsDQ0JzEyLjIiTiAxMDDCsDMzJzQ1LjgiRQ!5e0!3m2!1sen!2sth!4v1630000000000!5m2!1sen!2sth"
+                            width="100%" height="100%" style="border:0;" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            class="w-full h-full group-hover:grayscale-0 transition-all duration-500"></iframe>
+                    </template>
+                </UFooterColumns>
+            </UContainer>
+            <USeparator />
+        </template>
+
+        <template #left>
+            <p class="text-muted text-xs md:text-sm">
+                Copyright © {{ new Date().getFullYear() }} CAR-AUTO. All rights reserved.
+            </p>
+        </template>
+
+
+        <template #right>
+            <UTooltip v-for="link in socialLinks" :key="link.label" :text="link.label">
+                <UButton color="neutral" variant="ghost" :to="link.to" target="_blank" :icon="link.icon"
+                    :aria-label="link.label" size="xs" />
+            </UTooltip>
+        </template>
+
+    </UFooter>
+
 </template>
