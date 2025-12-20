@@ -20,13 +20,16 @@ const { data: posts } = await useAsyncData('random-posts', async () => {
 
 const articleUrl = `/blog/${route.params.slug}`
 
+const runtimeConfig = useRuntimeConfig()
+const siteUrl = runtimeConfig.public.siteUrl
+
 useSeoMeta({
     title: page.value?.title,
     description: page.value?.description,
     ogTitle: page.value?.title,
     ogDescription: page.value?.description,
-    ogImage: page.value?.image,
-    ogUrl: articleUrl,
+    ogImage: page.value?.image ? `${siteUrl}${page.value.image}` : `${siteUrl}/og-image.png`,
+    ogUrl: `${siteUrl}${articleUrl}`,
 })
 
 
