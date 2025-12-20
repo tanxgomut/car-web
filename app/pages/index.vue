@@ -6,6 +6,13 @@ import ContentPortfolio from '~/components/content/portfolio.vue'
 import ContentBlogs from '~/components/content/blogs.vue'
 import ContentTestimonials from '~/components/content/testimonials.vue'
 
+useSeoMeta({
+    title: 'หน้าแรก | ศูนย์บริการตกแต่งและซ่อมรถยนต์ครบวงจร',
+    description: 'รับแต่งรถ ติดตั้งชุดแต่งรอบคัน ล้อแม็ก ยาง ช่วงล่าง และเซอร์วิสทั่วไป โดยทีมช่างมืออาชีพ ประสบการณ์กว่า 10 ปี',
+    ogTitle: 'Car-Auto - เปลี่ยนรถคุณให้โดดเด่น ในสไตล์ที่เป็นคุณ',
+    ogDescription: 'ศูนย์รวมของแต่งรถยนต์คุณภาพ บริการครบวงจร ปรึกษาฟรี!',
+})
+
 const ctaLinks = ref([
     {
         label: '089-123-4567',

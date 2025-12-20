@@ -31,7 +31,7 @@ useSeoMeta({
   viewport: 'width=device-width, initial-scale=1',
 })
 
-const toaster = { position: 'top-right' }
+const toaster = { position: 'top-right' as const }
 
 </script>
 
