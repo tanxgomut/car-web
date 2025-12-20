@@ -22,7 +22,7 @@ export default defineAppConfig({
 
     pageLogos: {
       slots: {
-        logo: 'size-6 md:size-10 shrink-0'
+        logo: 'size-8 md:size-10 shrink-0'
       },
     },
     pageFeature: {
