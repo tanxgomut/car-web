@@ -31,10 +31,12 @@ useSeoMeta({
   viewport: 'width=device-width, initial-scale=1',
 })
 
+const toaster = { position: 'top-right' }
+
 </script>
 
 <template>
-  <UApp>
+  <UApp :toaster="toaster">
     <NuxtLoadingIndicator />
     <NuxtLayout>
       <NuxtPage />

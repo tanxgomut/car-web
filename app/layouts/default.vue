@@ -4,11 +4,18 @@ import type { NavigationMenuItem } from '@nuxt/ui'
 import type { FooterColumn } from '@nuxt/ui'
 import Logo from '~/components/Logo.vue'
 
+const { data: blogs } = await useAsyncData('blogs', () =>
+    queryCollection('blogs')
+        .select('title', 'date', 'to')
+        .order('date', 'DESC')
+        .limit(6)
+        .all()
+)
 
 const route = useRoute()
+const contact = useContact()
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
-const isSmAndUp = breakpoints.greaterOrEqual('sm')
 const isMobile = breakpoints.smaller('sm')
 
 const sectionTitles: Record<string, string> = {
@@ -33,31 +40,31 @@ useHead({
 const socialLinks = ref([
     {
         label: 'แอดไลน์คุยกับเรา',
-        to: 'https://line.me/ti/p/',
+        to: contact.value.line,
         icon: 'i-simple-icons-line',
         color: 'neutral'
     },
     {
         label: 'Facebook',
-        to: 'https://www.facebook.com/ชื่อเพจของคุณ',
+        to: contact.value.facebook,
         icon: 'i-simple-icons-facebook',
         color: 'neutral'
     },
     {
         label: 'Instagram',
-        to: 'https://www.instagram.com/ชื่อเพจของคุณ',
+        to: contact.value.instagram,
         icon: 'i-simple-icons-instagram',
         color: 'neutral'
     },
     {
         label: 'Youtube',
-        to: 'https://www.youtube.com/ชื่อเพจของคุณ',
+        to: contact.value.youtube,
         icon: 'i-simple-icons-youtube',
         color: 'neutral'
     },
     {
         label: 'Tiktok',
-        to: 'https://www.tiktok.com/@ชื่อเพจของคุณ',
+        to: contact.value.tiktok,
         icon: 'i-simple-icons-tiktok',
         color: 'neutral'
     },
@@ -88,45 +95,12 @@ const items = computed<NavigationMenuItem[]>(() => [
         to: '/#blogs',
         icon: 'i-lucide-file-text',
         active: route.path.startsWith('/blogs') || route.hash === '#blogs',
-        children: [
-            {
-                label: 'เทคนิคแต่งรถ',
-                icon: 'i-lucide-wrench',
-                description: 'เคล็ดลับและเทคนิคการแต่งรถให้สวยโดนใจ',
-                // to: '/blogs/car-modification-tips'
-            },
-            {
-                label: 'รีวิวอุปกรณ์',
-                icon: 'i-lucide-star',
-                description: 'รีวิวอุปกรณ์แต่งรถและอะไหล่คุณภาพ',
-                // to: '/blogs/equipment-reviews'
-            },
-            {
-                label: 'ข่าวสารวงการรถ',
-                icon: 'i-lucide-newspaper',
-                description: 'อัปเดตข่าวสารล่าสุดในวงการรถยนต์',
-                // to: '/blogs/car-news'
-            },
-            {
-                label: 'การดูแลรักษารถ',
-                icon: 'i-lucide-shield-check',
-                description: 'วิธีดูแลรักษารถให้อยู่ในสภาพดีเสมอ',
-                // to: '/blogs/car-maintenance'
-            },
-            {
-                label: 'แกลเลอรี่ผลงาน',
-                icon: 'i-lucide-image',
-                description: 'ชมผลงานการแต่งรถจากทีมช่างมืออาชีพ',
-                // to: '/blogs/gallery'
-            },
-            {
-                label: 'คำถามที่พบบ่อย',
-                icon: 'i-lucide-help-circle',
-                description: 'คำตอบสำหรับคำถามยอดนิยมเกี่ยวกับการแต่งรถ',
-                // to: '/blogs/faq'
-            }
-        ]
-
+        children: blogs?.value?.map((blog) => ({
+            // label: blog.title || 'Untitled',
+            icon: 'i-lucide-file-text',
+            description: blog.title,
+            to: `${blog.to}`,
+        }))
     },
     {
         label: 'ติดต่อเรา',
@@ -180,25 +154,25 @@ const columns: FooterColumn[] = [
             {
                 label: 'โทร: 081-234-5678',
                 icon: 'i-lucide-phone',
-                to: 'tel:0812345678',
+                to: `tel:${contact.value.tel}`,
                 target: '_self'
             },
             {
                 label: 'LINE: @car-auto',
                 icon: 'i-simple-icons-line',
-                to: 'https://line.me/ti/p/@car-auto',
+                to: contact.value.line,
                 target: '_blank'
             },
             {
                 label: 'Facebook Fanpage',
                 icon: 'i-simple-icons-facebook',
-                to: 'https://facebook.com/car-auto-shop',
+                to: contact.value.facebook,
                 target: '_blank'
             },
             {
                 label: 'แผนที่ร้าน (Google Maps)',
                 icon: 'i-lucide-map-pin',
-                to: 'https://maps.google.com/?q=พิกัดร้านของคุณ',
+                to: contact.value.googleMap,
                 target: '_blank'
             },
 
@@ -209,27 +183,29 @@ const columns: FooterColumn[] = [
         children: [
             {
                 label: 'ชุดแต่งรอบคัน (Body Kits)',
-                to: '/services/body-kits',
+                to: '/#services',
                 target: '_self'
             },
             {
                 label: 'ล้อแม็ก & ยาง (Wheels & Tires)',
-                to: '/services/wheels',
+                to: '/#services',
                 target: '_self'
             },
             {
                 label: 'ระบบช่วงล่าง (Suspension)',
-                to: '/services/suspension',
+                to: '/#services',
                 target: '_self'
             },
             {
                 label: 'เซอร์วิสทั่วไป (Maintenance)',
-                to: '/services/maintenance',
+                to: '/#services',
                 target: '_self'
             }
         ]
     }
 ]
+
+
 const isScrolled = ref(false)
 
 const handleScroll = () => {
@@ -244,6 +220,7 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll)
 })
+
 </script>
 <template>
 
@@ -298,9 +275,7 @@ onUnmounted(() => {
             <UContainer class="mb-6">
                 <UFooterColumns :columns="columns">
                     <template #right>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.613627725927!2d100.56053331483036!3d13.736717590357328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f0000000001%3A0x0!2zMTPCsDQ0JzEyLjIiTiAxMDDCsDMzJzQ1LjgiRQ!5e0!3m2!1sen!2sth!4v1630000000000!5m2!1sen!2sth"
-                            width="100%" height="100%" style="border:0;" loading="lazy"
+                        <iframe :src="contact?.googleMap" width="100%" height="100%" style="border:0;" loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"
                             class="w-full h-full group-hover:grayscale-0 transition-all duration-500"></iframe>
                     </template>

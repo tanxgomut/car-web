@@ -1,22 +1,10 @@
 <script setup lang="ts">
-import ContentHero from '../components/content/hero.vue'
-import ContentPromotion from '../components/content/promotion.vue'
-import ContentServices from '../components/content/services.vue'
-import ContentPortfolio from '../components/content/portfolio.vue'
-import ContentBlogs from '../components/content/blogs.vue'
-import ContentTestimonials from '../components/content/testimonials.vue'
-const links = ref([
-    {
-        label: 'Get started',
-        color: 'neutral'
-    },
-    {
-        label: 'Learn more',
-        color: 'neutral',
-        variant: 'subtle',
-        trailingIcon: 'i-lucide-arrow-right'
-    }
-])
+import ContentHero from '~/components/content/hero.vue'
+import ContentPromotion from '~/components/content/promotion.vue'
+import ContentServices from '~/components/content/services.vue'
+import ContentPortfolio from '~/components/content/portfolio.vue'
+import ContentBlogs from '~/components/content/blogs.vue'
+import ContentTestimonials from '~/components/content/testimonials.vue'
 
 const ctaLinks = ref([
     {

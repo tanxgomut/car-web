@@ -7,16 +7,18 @@ const props = defineProps<{
 </script>
 
 <template>
-    <UApp>
+    <NuxtLayout>
         <UError :clear="{
+            label: 'กลับสู่หน้าเว็บไซต์',
             color: 'neutral',
+            variant: 'outline',
             size: 'xl',
             icon: 'i-lucide-arrow-left',
-            class: 'rounded-full'
+            class: 'rounded-full px-6'
         }" :error="{
             statusCode: 404,
-            statusMessage: 'Page not found',
-            message: 'The page you are looking for does not exist.'
+            statusMessage: 'ไม่พบข้อมูลหน้าที่ระบุ',
+            message: 'ขออภัย หน้านี้อาจถูกลบหรือมีการเปลี่ยนแปลง URL กรุณาตรวจสอบลิงก์อีกครั้ง หรือกลับไปที่หน้าหลัก'
         }" />
-    </UApp>
+    </NuxtLayout>
 </template>
