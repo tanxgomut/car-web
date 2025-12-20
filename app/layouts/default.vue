@@ -255,7 +255,7 @@ onUnmounted(() => {
     <UHeader title="Car-Auto" :toggle="false" :ui="{
         root: isScrolled
             ? 'sticky bg-default/85'
-            : 'sticky lg:fixed w-full bg-default/85',
+            : 'sticky lg:fixed w-full bg-default/85 ',
 
     }">
 

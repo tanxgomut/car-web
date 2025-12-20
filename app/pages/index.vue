@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import ContentHero from '../components/content/hero.vue'
+import ContentPromotion from '../components/content/promotion.vue'
+import ContentServices from '../components/content/services.vue'
+import ContentPortfolio from '../components/content/portfolio.vue'
+import ContentBlogs from '../components/content/blogs.vue'
+import ContentTestimonials from '../components/content/testimonials.vue'
 const links = ref([
     {
         label: 'Get started',
@@ -14,6 +20,13 @@ const links = ref([
 
 const ctaLinks = ref([
     {
+        label: '089-123-4567',
+        icon: 'i-lucide-phone',
+        color: 'gray',
+        size: 'lg',
+        to: 'tel:0891234567'
+    },
+    {
         label: 'แอดไลน์คุยกับเรา',
         icon: 'i-simple-icons-line',
         color: 'success',
@@ -26,7 +39,7 @@ const ctaLinks = ref([
 <template>
     <div class="relative">
         <NuxtImg src="images/car/1.jpg" class="w-full h-[450px] sm:h-[550px] md:h-[650px] lg:h-[800px] object-cover"
-            alt="My image file description" placeholder="loading.png" loading="lazy" />
+            alt="My image file description" loading="lazy" />
         <div class="absolute inset-0 flex flex-col items-center justify-end pb-6 md:pb-12 bg-black/30">
             <p class="text-sm font-bold tracking-widest text-slate-400 mb-2 uppercase">One Stop Service</p>
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 md:mb-8">Repair & Modify</h1>
@@ -37,7 +50,6 @@ const ctaLinks = ref([
             </div>
         </div>
     </div>
-
     <ContentHero />
     <ContentPromotion />
     <ContentServices />

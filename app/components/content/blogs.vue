@@ -58,7 +58,8 @@ const blocks = ref([
                 },
             }
         ]
-    }
+    },
+
 ])
 </script>
 
@@ -68,6 +69,6 @@ const blocks = ref([
             description="อัปเดตเทรนด์การแต่งรถ เทคนิคการดูแลรักษา และข่าวสารโปรโมชั่นล่าสุด" headline="LATEST NEWS"
             :links="links as any" class="mb-12" :ui="{ headline: 'text-cyan-400' }" />
 
-        <UBlogPosts :posts="blocks as any" />
+        <UBlogPosts :posts="blocks as any" orientation="vertical" />
     </UContainer>
 </template>

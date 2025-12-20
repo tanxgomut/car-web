@@ -1,14 +1,29 @@
 <script setup lang="ts">
 const links = ref([
     {
-        label: 'ปรึกษา/จองคิว',
-        color: 'primary',
-        to: '/',
-        icon: 'i-lucide-square-play'
+        label: 'จองคิว / ประเมินราคาฟรี',
+        to: 'https://line.me/ti/p/yourid',
+        target: '_blank',
+        icon: 'i-lucide-calendar-days',
+        size: 'xl',
+        color: 'gray',
+        variant: 'solid',
+        class: `
+            relative overflow-hidden border-0 ring-0 text-white font-extrabold rounded-full tracking-wider
+            shadow-md shadow-primary-500/50 
+            before:absolute before:inset-[-500%] before:content-[''] 
+            before:animate-[spin_3s_linear_infinite] 
+            before:bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#0ea5e9_10%,#ef4444_20%,#a855f7_25%,transparent_50%)]
+            before:z-[-2]
+            after:absolute after:inset-[2px] after:bg-gray-900 after:content-[''] 
+            after:rounded-full after:z-[-1]
+            hover:scale-105 transition-all duration-300
+        `
     },
     {
         label: 'ดูผลงาน',
-        to: '/',
+        // to: '/#portfolio',
+        to: '/blog/tuning',
         color: 'neutral',
         variant: 'subtle',
         trailingIcon: 'i-lucide-arrow-right'

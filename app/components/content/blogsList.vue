@@ -1,5 +1,9 @@
 <script setup lang="ts">
 
+useHead({
+    title: 'Blogs',
+})
+
 const blocks = ref([
     {
         title: '5 สัญญาณเตือน! ช่วงล่างรถคุณกำลังมีปัญหา',
@@ -7,7 +11,7 @@ const blocks = ref([
         image: '/images/blogs/1.avif',
         to: '/blogs/suspension-check',
         date: 'Dec 12, 2024',
-        badge: { label: 'Maintenance', color: 'neutral' }, // ปรับสีตามหมวดหมู่
+        badge: { label: 'Maintenance', color: 'neutral' },
         authors: [
             {
                 name: 'ทีมช่างเทคนิค',

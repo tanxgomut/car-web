@@ -20,10 +20,24 @@ const services = ref([
 const links = ref([
     {
         label: 'จองคิวซ่อม / ประเมินราคาแต่งรถ',
-        to: '/services',
+        to: 'https://line.me/ti/p/yourid',
+        target: '_blank',
+        icon: 'i-lucide-calendar-days',
+        size: 'xl',
+        color: 'gray',
         variant: 'solid',
-        trailingIcon: 'i-lucide-arrow-right'
-    }
+        class: `
+            relative overflow-hidden border-0 ring-0 text-white font-extrabold rounded-full tracking-wider
+            shadow-md shadow-primary-500/50
+            before:absolute before:inset-[-500%] before:content-[''] 
+            before:animate-[spin_3s_linear_infinite] 
+            before:bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#0ea5e9_10%,#ef4444_20%,#a855f7_25%,transparent_50%)]
+            before:z-[-2]
+            after:absolute after:inset-[2px] after:bg-gray-900 after:content-[''] 
+            after:rounded-full after:z-[-1]
+            hover:scale-105 transition-all duration-300
+        `
+    },
 ])
 
 const items = ref([
@@ -33,57 +47,61 @@ const items = ref([
     '/images/car/4.jpg',
 ])
 
-const stepss = ref([
+
+const serviceItems = ref([
     {
-        icon: 'i-lucide-calendar-plus',
-        title: 'นัดหมายและประเมินเบื้องต้น',
-        description: 'โทรศัพท์หรือจองคิวออนไลน์ เพื่อปรึกษาปัญหา/ความต้องการ พร้อมประเมินค่าใช้จ่ายเบื้องต้น',
-        image: 'https://images.unsplash.com/photo-1627916607065-a86847c1b5a5?q=80&w=600&h=400&auto=format&fit=crop', // รูปคนคุยโทรศัพท์ / จองคิว
+        image: '/images/car/1.jpg',
+        tt: 'ซ่อมบำรุงทั่วไป',
+        alt: 'Maintenance & Service'
     },
     {
-        icon: 'i-lucide-car-front',
-        title: 'นำรถเข้าบริการ',
-        description: 'นำรถเข้ามาที่ศูนย์ของเรา ทีมช่างจะทำการตรวจเช็คอย่างละเอียด เพื่อยืนยันขอบเขตงานและราคา',
-        image: 'https://images.unsplash.com/photo-1549887552-cb1071f4b55c?q=80&w=600&h=400&auto=format&fit=crop', // รูปรถเข้าอู่ / ช่างตรวจสอบ
+        image: '/images/car/2.jpg',
+        tt: 'ช่วงล่าง & เบรก',
+        alt: 'Suspension & Safety'
     },
     {
-        icon: 'i-lucide-hammer',
-        title: 'ดำเนินการซ่อม/ติดตั้ง',
-        description: 'ช่างผู้เชี่ยวชาญลงมือปฏิบัติงานด้วยเครื่องมือมาตรฐาน พร้อมอัปเดตความคืบหน้าเป็นระยะ',
-        image: 'https://images.unsplash.com/photo-1607869689252-a548b2610d48?q=80&w=600&h=400&auto=format&fit=crop', // รูปช่างกำลังทำงาน / ติดตั้ง
+        image: '/images/car/3.jpg',
+        tt: 'จูนนิ่ง & รีแมพ',
+        alt: 'Engine Tuning'
     },
     {
-        icon: 'i-lucide-key-round',
-        title: 'ตรวจสอบและส่งมอบ',
-        description: 'ทดสอบงานอย่างละเอียด และตรวจสอบคุณภาพก่อนส่งมอบ พร้อมคำแนะนำการใช้งานและดูแลรักษา',
-        image: 'https://images.unsplash.com/photo-1558980394-ee26467366a7?q=80&w=600&h=400&auto=format&fit=crop', // รูปกุญแจรถ / ลูกค้าขับออกไป
-    }
-]);
+        image: '/images/car/4.jpg',
+        tt: 'ชุดแต่งรอบคัน',
+        alt: 'Body Parts & Aero'
+    },
+])
+
+
+
 
 const steps = [
     {
         step: '01',
         title: 'นัดหมาย / ประเมิน',
         description: 'ปรึกษาปัญหา จองคิว หรือส่งรูปเพื่อประเมินราคาเบื้องต้นได้ทันที',
-        icon: 'i-lucide-calendar-clock'
+        icon: 'i-lucide-calendar-clock',
+        image: '/images/services/1.avif'
     },
     {
         step: '02',
         title: 'ตรวจเช็คละเอียด',
         description: 'ทีมช่างตรวจสอบสภาพรถจริง เพื่อยืนยันอะไหล่และค่าใช้จ่ายที่ชัดเจน',
-        icon: 'i-lucide-search-check'
+        icon: 'i-lucide-search-check',
+        image: '/images/services/2.jpg'
     },
     {
         step: '03',
         title: 'ดำเนินการซ่อม/แต่ง',
         description: 'ลงมือปฏิบัติงานด้วยความระมัดระวัง รายงานผลเป็นระยะ ไม่ดองงาน',
-        icon: 'i-lucide-wrench'
+        icon: 'i-lucide-wrench',
+        image: '/images/services/3.png'
     },
     {
         step: '04',
         title: 'ส่งมอบรถ',
         description: 'ตรวจสอบ QC ครั้งสุดท้าย ล้างทำความสะอาด พร้อมส่งรถคืนสู่มือคุณ',
-        icon: 'i-lucide-key'
+        icon: 'i-lucide-key',
+        image: '/images/services/4.png'
     }
 ]
 
@@ -92,20 +110,31 @@ const steps = [
 <template>
     <UPageSection id="services" title="One Stop Service for Your Car"
         description="ไม่ว่าจะ 'ซ่อม' เพื่อให้วิ่งดี หรือ 'แต่ง' เพื่อให้ดูดี... ที่ CAR-AUTO เราดูแลให้คุณได้ครบ จบในที่เดียว"
-        icon="i-lucide-wrench" orientation="horizontal" reverse :features="services" :links="links as any">
+        orientation="horizontal" reverse :features="services" :links="links as any">
 
-        <UCarousel v-slot="{ item }" dots :items="items">
-            <NuxtImg :src="item" alt="Car Modification Service" loading="lazy" placeholder="loading.png"
+        <UCarousel v-slot="{ item }" dots :autoplay="{ delay: 3000 }" :items="items">
+            <NuxtImg :src="item" alt="Car Modification Service" loading="lazy"
                 class="w-full h-[300px] md:h-[400px] object-cover rounded-lg shadow-2xl" />
         </UCarousel>
     </UPageSection>
 
+    <div class="relative pb-20">
+        <UCarousel v-slot="{ item }" loop :autoplay="{ delay: 3000 }" :items="serviceItems" class="w-full relative">
+            <div class="relative overflow-hidden rounded-lg ">
+                <NuxtImg :src="item.image" :alt="item.alt" loading="lazy"
+                    class="w-full h-[250px] md:h-[550px] object-cover rounded-lg" />
+                <div class="absolute inset-0 flex flex-col items-center justify-end pb-2">
+                    <h2 class="text-2xl md:text-4xl font-bold text-white mb-2 md:mb-8">{{ item.tt }}</h2>
+                </div>
+            </div>
+        </UCarousel>
+    </div>
+
     <div class="relative py-16 overflow-hidden">
 
         <div class="absolute inset-0">
-            <NuxtImg src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?q=80&w=2000&auto=format&fit=crop"
-                alt="Car Workshop Background" class="w-full h-full object-cover" loading="lazy"
-                placeholder="loading.png" />
+            <NuxtImg src="/images/services/image.png" alt="Car Workshop Background" class="w-full h-full object-cover"
+                loading="lazy" />
             <div class="absolute inset-0 bg-gray-900/65 backdrop-blur"></div>
         </div>
 
@@ -136,6 +165,7 @@ const steps = [
                     <h3 class="font-bold text-white relative group-hover:text-cyan-400 transition-colors
                    text-lg md:text-xl 
                    mb-2 md:mb-3">
+                        <!-- <UIcon :name="item.icon" />  -->
                         {{ item.title }}
                     </h3>
 

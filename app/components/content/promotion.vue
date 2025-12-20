@@ -76,14 +76,14 @@ const promotions = ref([
 
             <UPageHeader title="โปรโมชั่นสุดคุ้มประจำเดือน"
                 description="ดีลพิเศษที่เราคัดสรรมาเพื่อรถคนโปรดของคุณ รีบจองก่อนหมดเขต" headline="SPECIAL OFFERS"
-                class="mb-8 md:mb-12 text-center"
+                class="mb-8 md:mb-12"
                 :ui="{ title: 'text-white', description: 'text-white', headline: 'text-amber-500 font-bold' }" />
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 <div v-for="(promo, index) in promotions" :key="index"
                     class="group relative bg-gray-900 rounded-3xl overflow-hidden border border-gray-800 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-cyan-900/20">
                     <div
-                        class="absolute inset-0 rounded-3xl p-[2px] bg-linear-to-r from-cyan-500 via-purple-500 to-amber-800 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10">
+                        class="absolute inset-0 rounded-3xl p-[2px] bg-linear-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10">
                     </div>
 
                     <div class="flex flex-col md:flex-row h-full">
